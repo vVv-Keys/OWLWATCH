@@ -91,7 +91,7 @@ def bullets(items: List[str], max_items: int = 999) -> str:
 
 
 def render_markdown(r: OwlwatchReport) -> str:
-    return f\"\"\"# {r.title}
+    return f"""# {r.title}
 **Date:** {r.date_label} ({r.tz_label})
 **Run Slot:** {r.run_slot}
 
@@ -133,7 +133,9 @@ def render_markdown(r: OwlwatchReport) -> str:
 
 ## Sources to Monitor
 {bullets(r.sources)}
-\"\"\"
+"""
+
+
 def render_discord_payload(r: OwlwatchReport) -> dict:
     max_alerts = int(env("OWLWATCH_MAX_ALERTS", "8") or "8")
     desc = (

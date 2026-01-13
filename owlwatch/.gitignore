@@ -1,0 +1,5 @@
+# Ignore generated directories and virtual environments
+output/
+state/
+.venv/
+__pycache__/
