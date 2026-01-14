@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+pip install -r owlwatch/requirements.txt
 
       - name: Determine run slot (AM/PM) based on scheduled UTC hour
         id: slot
@@ -45,14 +45,14 @@ jobs:
         env:
           OWLWATCH_TZ: "America/Chicago"
           OWLWATCH_RUN_SLOT: ${{ steps.slot.outputs.slot }}
-          OWLWATCH_TITLE: "KEYSGUARD OWLWATCH — Daily Cyber Intelligence Brief"
+          owlwatch/requirements.txt: "KEYSGUARD OWLWATCH — Daily Cyber Intelligence Brief"
           OWLWATCH_WEBHOOK_URL: ${{ secrets.OWLWATCH_DISCORD_WEBHOOK }}
           # Optional multi-webhook fanout:
           # OWLWATCH_WEBHOOK_URLS: ${{ secrets.OWLWATCH_DISCORD_WEBHOOKS }}
           OWLWATCH_OUTPUT_DIR: "output"
           OWLWATCH_STATE_DIR: "state"
         run: |
-          python owlwatch_report.py
+         python owlwatch/owlwatch_report.py
 
       - name: Commit generated artifacts (optional but recommended)
         run: |
