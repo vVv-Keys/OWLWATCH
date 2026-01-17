@@ -41,16 +41,16 @@ jobs:
             echo "slot=AM" >> $GITHUB_OUTPUT
           fi
 
-          - name: Run OWLWATCH generator + Discord post
-            env:
-              OWLWATCH_TZ: "America/Chicago"
-              OWLWATCH_RUN_SLOT: ${{ steps.slot.outputs.slot }}
-              OWLWATCH_WEBHOOK_URL: ${{ secrets.OWLWATCH_WEBHOOK_URL }}
-              # Optional multi-webhook fanout:
-              # OWLWATCH_WEBHOOK_URLS: ${{ secrets.OWLWATCH_DISCORD_WEBHOOKS }}
-              OWLWATCH_OUTPUT_DIR: "output"
+      - name: Run OWLWATCH generator + Discord post
+        env:
+          OWLWATCH_TZ: "America/Chicago"
+          OWLWATCH_RUN_SLOT: ${{ steps.slot.outputs.slot }}
+          OWLWATCH_WEBHOOK_URL: ${{ secrets.OWLWATCH_WEBHOOK_URL }}
+          # Optional multi-webhook fanout:
+          # OWLWATCH_WEBHOOK_URLS: ${{ secrets.OWLWATCH_DISCORD_WEBHOOKS }}
+          OWLWATCH_OUTPUT_DIR: "output"
           OWLWATCH_STATE_DIR: "state"
-        run: |
+        OWLWATCH_OUTPUT_DIR: |
           python owlwatch/owlwatch_report.py
 
       - name: Commit generated artifacts (optional but recommended)
