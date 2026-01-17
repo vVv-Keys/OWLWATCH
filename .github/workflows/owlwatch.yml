@@ -50,10 +50,10 @@ jobs:
           # OWLWATCH_WEBHOOK_URLS: ${{ secrets.OWLWATCH_DISCORD_WEBHOOKS }}
           OWLWATCH_OUTPUT_DIR: "output"
           OWLWATCH_STATE_DIR: "state"
-        OWLWATCH_OUTPUT_DIR: |
+        run: |
           python owlwatch/owlwatch_report.py
 
-      - run: Commit generated artifacts (optional but recommended)
+      - name: Commit generated artifacts (optional but recommended)
         run: |
           git config user.name "owlwatch-bot"
           git config user.email "owlwatch-bot@users.noreply.github.com"
