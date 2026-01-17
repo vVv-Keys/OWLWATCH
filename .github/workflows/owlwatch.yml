@@ -42,10 +42,10 @@ jobs:
           fi
 
       - name: Run OWLWATCH generator + Discord post
-        env:
+      env:  
           OWLWATCH_TZ: "America/Chicago"
           OWLWATCH_RUN_SLOT: ${{ steps.slot.outputs.slot }}
-          OWLWATCH_WEBHOOK_URL: ${{ secrets.OWLWATCH_DISCORD_WEBHOOK }}
+             OWLWATCH_WEBHOOK_URL: ${{ secrets.OWLWATCH_WEBHOOK_URL }}
           # Optional multi-webhook fanout:
           # OWLWATCH_WEBHOOK_URLS: ${{ secrets.OWLWATCH_DISCORD_WEBHOOKS }}
           OWLWATCH_OUTPUT_DIR: "output"
