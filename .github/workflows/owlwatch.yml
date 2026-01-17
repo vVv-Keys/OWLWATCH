@@ -53,7 +53,7 @@ jobs:
         OWLWATCH_OUTPUT_DIR: |
           python owlwatch/owlwatch_report.py
 
-      - name: Commit generated artifacts (optional but recommended)
+      - run: Commit generated artifacts (optional but recommended)
         run: |
           git config user.name "owlwatch-bot"
           git config user.email "owlwatch-bot@users.noreply.github.com"
