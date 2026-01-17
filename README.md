@@ -1,5 +1,7 @@
 # owlwatch
-
+----
+INSTRUCTIONS BELOW BUT AM ADDING OFFICIAL COVER PAGE ONCE COMPLETE 
+----
 Small automation to render daily notes from a template into `output/` and/or post OWLWATCH summaries to Discord.
 
 Files:
