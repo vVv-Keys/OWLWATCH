@@ -1,43 +1,53 @@
-# owlwatch
-----
-INSTRUCTIONS BELOW BUT AM ADDING OFFICIAL COVER PAGE ONCE COMPLETE 
-----
-Small automation to render daily notes from a template into `output/` and/or post OWLWATCH summaries to Discord.
+# OWLWATCH 🦉
 
-Files:
-- `owlwatch_automation.py` – renders `templates/daily.md` into `output/YYYY-MM-DD.md`
-- `owlwatch_report.py` – generates an OWLWATCH report and posts to Discord
-- `templates/daily.md` – Jinja2 template used for daily notes
-- `requirements.txt` – Python dependency list
-- `.github/workflows/owlwatch.yml` – GitHub Actions workflow for scheduled runs
-- `output/` – created by scripts or GitHub Actions to store generated files
-- `state/` – created by scripts or GitHub Actions for idempotency/last-run tracking
+**A vigilant daily reporting and automation tool for cybersecurity teams.**
 
-## Quickstart (local)
+Owlwatch automates your morning and evening security reviews so your team stays informed and ready. It generates polished Markdown notes from a Jinja2 template, sends concise posture reports to a Discord channel, and stores artifacts for historical tracking.
 
-1. Create a virtual environment and install requirements:
+## ✨ Features
 
-       python -m venv .venv
-       source .venv/bin/activate
-       pip install -r requirements.txt
+- **Daily notes rendering** – Create structured daily logs from `templates/daily.md` into `output/YYYY-MM-DD.md`.
+- **Threat posture reports** – Generate comprehensive AM/PM reports that summarise top priorities, recent patches, and trending attacks.
+- **Discord integration** – Automatically post reports to one or more Discord channels via secure webhooks.
+- **Scheduled workflows** – Use GitHub Actions to run the generator every morning and evening (8 AM / 10 PM America/Chicago).
+- **Idempotent & stateful** – Scripts write artifacts to `output/` and track last run in `state/` so you never send duplicate reports.
+- **Fully customisable** – Modify the Jinja2 templates or extend `build_report()` in `owlwatch_report.py` to fit your needs.
 
-2. Run the report/posting script (configure the webhook environment variables):
+## 🚀 Quickstart
 
-       export OWLWATCH_WEBHOOK_URL="https://discord.com/api/webhooks/..."
-       export OWLWATCH_RUN_SLOT=AM
-       python owlwatch_report.py
+### 1. Local setup
 
-3. Or render the daily template locally:
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r owlwatch/requirements.txt
+```
 
-       python owlwatch_automation.py
+### 2. Run a report locally
 
-## CI / GitHub Actions
+Set your Discord webhook and optional run slot (AM or PM), then run the report script:
 
-Workflows are provided in `.github/workflows/`. Ensure you add the repository secret:
+```bash
+export OWLWATCH_WEBHOOK_URL="https://discord.com/api/webhooks/..."
+export OWLWATCH_RUN_SLOT=AM
+python owlwatch/owlwatch_report.py
+```
 
-- `OWLWATCH_DISCORD_WEBHOOK` (or set `OWLWATCH_WEBHOOK_URL` / `OWLWATCH_WEBHOOK_URLS`)
+Or render the daily note template:
 
-## Customization
+```bash
+python owlwatch/owlwatch_automation.py
+```
 
-- Edit `templates/daily.md` to change the daily note format or modify `build_report()` in `owlwatch_report.py` to adjust the report contents.
-- Both scripts write artifacts to `output/` and use `state/` for idempotency/last‑run tracking.
+### 3. GitHub Actions
+
+This repository includes a workflow in `.github/workflows/owlwatch.yml` that runs at 8 AM and 10 PM America/Chicago. To enable posting to Discord, add these secrets in **Settings → Secrets and variables → Actions**:
+
+- `OWLWATCH_WEBHOOK_URL` – your Discord webhook URL.
+- (Optional) `OWLWATCH_WEBHOOK_URLS` – a semicolon-separated list of multiple webhook URLs.
+
+## ❤️ Contributing
+
+We welcome ideas and contributions! Feel free to open issues or pull requests for new features, templates, or integrations.
+
+Stay wise. Stay secure.
